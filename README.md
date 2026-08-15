@@ -1,72 +1,72 @@
-# Fake News Classification: NLP & CNN Experiments
+# Fake News Detection — NLP & CNN Experiments
 
-An experimental natural-language-processing project for classifying real and fake news articles with a 1D convolutional neural network (CNN).
+This repository contains **my NLP and deep-learning experiment work contributed to the collaborative [Fake News Detection](https://github.com/hosseindamavandi/Fake-News-Detection) project**.
 
-The repository contains multiple notebook experiments that keep the same general text-classification workflow while comparing different neural-network optimizers, including **Adam**, **Adamax**, **SGD**, and **Adadelta**.
+It is intentionally scoped to my experimental work rather than presented as the complete team project. The original repository contains the integrated data-preparation, training, model, and inference pipeline.
 
-> This repository is currently private and represents an experimental/learning workflow rather than a packaged production model.
+## Project context
 
-## Experiment Workflow
+The team project explores AI approaches for classifying fake and real news, including neural-network, convolutional, and recurrent architectures. My work in this repository focuses on an NLP preprocessing pipeline and CNN classification experiments, including comparisons across several optimizers.
 
-The notebooks cover a pipeline similar to:
+**Original collaborative project:**  
+https://github.com/hosseindamavandi/Fake-News-Detection
 
-1. Load separate real-news and fake-news CSV datasets.
-2. Add binary class labels and combine the datasets.
-3. Clean text with regular expressions and lowercase normalization.
-4. Tokenize text with NLTK.
-5. Apply lemmatization and stemming.
-6. Convert text into numerical features and padded sequences.
-7. Split the data into training and test sets.
-8. Train a Keras `Sequential` model containing `Conv1D`, pooling, dense, and dropout layers.
-9. Evaluate the classifier with loss, accuracy, predictions, and a confusion matrix.
-10. Repeat the experiment with different optimizers to compare training behaviour.
+**My GitHub account:**  
+https://github.com/HoosseinRahimi
 
-## Tech Stack
+## My contribution
 
-- Python
-- NumPy
-- Pandas
-- NLTK
-- scikit-learn
-- TensorFlow / Keras
-- Jupyter Notebook / Google Colab
+The notebooks in this repository document experiments around:
 
-## Repository Structure
+- combining real and fake news datasets and assigning class labels
+- categorical encoding of article subjects
+- text cleaning and normalization
+- tokenization
+- lemmatization and stemming with NLTK
+- bag-of-words feature extraction with `CountVectorizer`
+- train/test preparation
+- 1D CNN classification with Keras
+- dropout-based regularization
+- confusion-matrix evaluation
+- optimizer experiments using **Adam**, **Adamax**, **SGD**, and **Adadelta**
+
+These notebooks are preserved as experiment snapshots from the development process. They are not intended to replace the final integrated implementation in the main project repository.
+
+## Repository structure
 
 ```text
-nlp-project/
-├── Accurasy tests/        # Legacy folder name kept to preserve notebook history
-│   ├── Adam
-│   ├── Adamax
-│   ├── SGD
-│   └── adadelta
+.
+├── notebooks/
+│   ├── README.md
+│   └── optimizer_experiments/
+│       ├── adam.ipynb
+│       ├── adamax.ipynb
+│       ├── sgd.ipynb
+│       └── adadelta.ipynb
 ├── requirements.txt
 ├── .gitignore
 ├── LICENSE
 └── README.md
 ```
 
-The files in `Accurasy tests/` are legacy Colab notebook JSON files stored without the usual `.ipynb` extension. They are preserved as-is rather than being renamed or rewritten just for presentation, because they contain historical experiment output.
+## Dataset
 
-## Dataset Setup
+The collaborative project uses the **ISOT Fake News Dataset**. It contains real and fake news articles with fields such as title, text, subject, and publication date.
 
-The news datasets are **not included** in the repository. The notebooks expect separate real-news and fake-news CSV files with fields such as:
+Dataset information:  
+https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/
 
-- `title`
-- `text`
-- `subject`
-- `date`
+The dataset itself is **not redistributed in this repository**. Download it from its original source and provide the `True.csv` and `Fake.csv` files locally when reproducing the experiments.
 
-The existing notebook cells contain empty placeholders similar to:
+## Historical experiment result
 
-```python
-true_data = pd.read_csv("")
-fake_data = pd.read_csv("")
-```
+One preserved Adam notebook records a test accuracy of approximately **77.45%** with a confusion matrix produced by the CNN experiment.
 
-Set those paths to your local or Colab dataset files before running an experiment.
+That number is included only as a historical development result. It should **not** be treated as a fully reproducible benchmark because the original notebook contains environment-dependent data paths and some experiment steps were created interactively in Google Colab.
 
-## Environment
+For the final project-level model design, training setup, and reported results, refer to the original collaborative repository.
+
+## Setup
 
 Create a virtual environment and install the dependencies:
 
@@ -74,69 +74,58 @@ Create a virtual environment and install the dependencies:
 python -m venv .venv
 ```
 
-**Windows**
-
-```bash
-.venv\Scripts\activate
-```
-
-**macOS / Linux**
+Linux/macOS:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Then install:
+Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Then install the packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## NLTK Note
+The historical notebooks use NLTK resources. Instead of downloading the entire NLTK collection, install only the resources required by the notebook you are reproducing, such as the tokenizer and WordNet data.
 
-The legacy notebooks call:
+## Reproducibility notes
 
-```python
-nltk.download("all")
-```
+These notebooks were originally developed in Google Colab and still contain historical outputs. To reproduce an experiment:
 
-That downloads the complete NLTK data collection and is much heavier than this project normally needs. For a future cleanup, it would be better to request only the resources actually used by the preprocessing pipeline, such as the tokenizer and WordNet resources required by the installed NLTK version.
+1. Download the ISOT dataset from the original source.
+2. Update the `True.csv` and `Fake.csv` paths in the selected notebook.
+3. Install the dependencies from `requirements.txt`.
+4. Install the required NLTK data packages.
+5. Run the notebook from top to bottom in a clean environment.
 
-## Model
+Because these are historical experiment snapshots, package-version differences may affect results.
 
-The inspected CNN experiment uses a structure based on:
+## Attribution and scope
 
-- `Conv1D`
-- `MaxPooling1D`
-- `Flatten`
-- dense hidden layer with ReLU
-- dropout regularization
-- softmax output layer
+This repository represents **my contribution and experiments within a team project**. It does not claim sole authorship of the complete Fake News Detection system.
 
-The optimizer is changed between experiment files so their training behaviour can be compared under a similar model structure.
+For the full project, other contributors, final architecture, and integrated implementation, see:
 
-## Reproducibility Caveats
+https://github.com/hosseindamavandi/Fake-News-Detection
 
-The notebooks were created as Colab experiments and are not yet a fully reproducible benchmark suite. In particular:
+The original team repository and the dataset source should be cited when building on this work.
 
-- dataset paths must be supplied manually
-- dataset files are not versioned here
-- notebook outputs come from historical runs
-- random seeds and a single shared train/test split should be fixed before treating optimizer results as a controlled comparison
-- software versions were not pinned in the original experiments
+## Tech stack
 
-Because of those limitations, historical accuracy values should be treated as experiment outputs, not as a rigorous optimizer ranking.
-
-## Good Next Steps
-
-- convert the legacy experiment files to standard `.ipynb` notebooks
-- extract shared preprocessing/model code into reusable Python modules
-- download only required NLTK resources
-- fix random seeds and reuse the same split across optimizers
-- record metrics in a single comparison table
-- add precision, recall, F1 score, and confusion-matrix plots
-- save experiment configuration and model metadata
+- Python
+- Pandas
+- NumPy
+- NLTK
+- scikit-learn
+- Keras / TensorFlow
+- Jupyter / Google Colab
 
 ## License
 
-See [`LICENSE`](LICENSE).
+See [LICENSE](LICENSE) for this repository's license terms. Third-party datasets and upstream project materials remain subject to their own licenses and terms.
